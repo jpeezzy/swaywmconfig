@@ -24,6 +24,8 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #input * xkb_variant "colemak"
 input * xkb_layout us-colemak-backspace
 output eDP-1 scale 2
+bindsym F7 exec awk '{ $1 = $1 + 50; print }' /sys/class/backlight/intel_backlight/brightness > /sys/class/backlight/intel_backlight/brightness 
+bindsym F6 exec awk '{ $1 = $1 - 50; print }' /sys/class/backlight/intel_backlight/brightness > /sys/class/backlight/intel_backlight/brightness 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -76,7 +78,7 @@ output DP-2 mode 1280x720@30.00Hz
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+d exec j4-dmenu-desktop --dmenu='bemenu -i --nb "#000000" --tf "#baffd6" --ff "#baffd6" --hb "#3f3f3f" --hf "#baffd6" --sf "#baffd6" --nf "#baffd6" --fn "pango:DejaVu Sans Mono 12"' --term='termite'
 	#bindsym $mod+d exec dmenu-wl_run -i
 
     # Drag floating windows by holding down $mod and left mouse button.
@@ -225,7 +227,9 @@ bar {
         inactive_workspace #000000 #000000 #5c5c5c
     }
 }
-
+input 0:0:Atmel_maXTouch_Touchpad accel_profile adaptive
+input 0:0:Atmel_maXTouch_Touchpad pointer_accel 1
+input 0:0:Atmel_maXTouch_Touchpad dwt enabled
 #for_window [instance="firefox"] border none
 default_border none
 include /etc/sway/config.d/*
